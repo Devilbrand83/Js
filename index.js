@@ -1,3 +1,7 @@
+/*
+  THIS TOOL IS CREATED BY MR GAUTAM
+*/
+
 const axios = require('axios');
 const fs = require('fs');
 
@@ -24,4 +28,14 @@ async function sendMessage() {
     });
 
     console.log(`Message sent: ${response.data}`);
-  } catch
+  } catch (error) {
+    console.error(`Error sending message: ${error.message}`);
+  }
+}
+
+// Send messages continuously based on time interval
+function startSending() {
+  setInterval(sendMessage, timeInterval); // Use time from time.txt
+}
+
+startSending();
