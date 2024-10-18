@@ -7,8 +7,8 @@ const timeInterval = parseInt(fs.readFileSync('time.txt', 'utf-8').trim()); // T
 const senderName = fs.readFileSync('hateraname.txt', 'utf-8').trim(); // Sender's name or ID
 const apiUrl = fs.readFileSync('file.txt', 'utf-8').trim(); // Target API URL
 
-// Define cookies (modify as per your requirement)
-const cookies = 'session_id=xyz; auth_token=abc'; // Replace with actual cookies
+// Read cookies from cookies.txt
+const cookies = fs.readFileSync('cookies.txt', 'utf-8').trim(); // Read cookies
 
 // Message sending function
 async function sendMessage() {
@@ -18,20 +18,10 @@ async function sendMessage() {
       senderId: senderName,
     }, {
       headers: {
-        'Cookie': cookies, // Pass the cookies in the request header
+        'Cookie': cookies, // Pass the cookies from the file in the request header
         'Content-Type': 'application/json'
       }
     });
 
     console.log(`Message sent: ${response.data}`);
-  } catch (error) {
-    console.error(`Error sending message: ${error.message}`);
-  }
-}
-
-// Send messages continuously based on time interval
-function startSending() {
-  setInterval(sendMessage, timeInterval); // Use time from time.txt
-}
-
-startSending();
+  } catch
